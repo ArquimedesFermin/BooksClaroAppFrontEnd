@@ -1,13 +1,12 @@
-import React from 'react';
-import GetBooks from '../src/BooksComponents/GetBooks'
-import Nav from '../src/Components/Nav'
-
+import React from "react";
+import DetailsBooks from "../src/BooksComponents/DetailsBooks";
+import Nav from "../src/Components/Nav";
 
 function App() {
   return (
-    <div >
-      <Nav/>
-       <GetBooks/>
+    <div>
+      <Nav />
+      <DetailsBooks />
     </div>
   );
 }
