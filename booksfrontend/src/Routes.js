@@ -3,6 +3,8 @@ import { Switch, Route } from "react-router-dom";
 import GetBooks from "../src/BooksComponents/GetBooks";
 import DetailsBooks from "../src/BooksComponents/DetailsBooks";
 import CreateBooks from "./BooksComponents/CreateBooks";
+import UpdateBooks from "./BooksComponents/UpdateBooks";
+
 
 const Routes = () => {
   return (
@@ -10,6 +12,9 @@ const Routes = () => {
       <Route exact path="/" component={GetBooks} />
       <Route path="/details/:id" component={DetailsBooks} />
       <Route path="/create" component={CreateBooks} />
+      <Route path="/update/:id" component={UpdateBooks} />
+    
+
     </Switch>
   );
 };

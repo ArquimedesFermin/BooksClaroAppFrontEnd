@@ -1,0 +1,17 @@
+.table {
+    color: red;
+    padding-top: 146px;
+    padding-left: 9%;
+    width: 82%;
+  }
+  
+  .cell {
+    white-space: nowrap;
+  }
+  h2 {
+    text-align: center;
+  }
+  .buscar {
+    color: black;
+  }
+  

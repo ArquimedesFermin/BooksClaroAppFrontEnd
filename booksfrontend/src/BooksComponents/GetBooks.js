@@ -9,11 +9,12 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import "./GetBookStyle.css";
-import NotesIcon from '@material-ui/icons/Notes';
+import NotesIcon from "@material-ui/icons/Notes";
 import TextField from "@material-ui/core/TextField";
 import { Autocomplete } from "@material-ui/lab";
 import { Link } from "react-router-dom";
-
+import EditIcon from "@material-ui/icons/Edit";
+import AddCircleIcon from "@material-ui/icons/AddCircle";
 var moment = require("moment"); //
 
 function GetBooks() {
@@ -70,10 +71,20 @@ function GetBooks() {
 
   const classes = useStyles();
 
+  const style = {
+    color: "black",
+    textDecoration: "none",
+  };
+
   return (
     <div>
       <h2>ClaroBooks</h2>
+
       <div className="table">
+        <Link to={`create`} style={style}>
+          <AddCircleIcon style={{ fontSize: 50 }} />
+        </Link>
+
         <div className={"buscar"}>
           <Autocomplete
             id="combo-box-demo"
@@ -117,7 +128,12 @@ function GetBooks() {
                     {moment(item.publishDate).format("DD/MM/YYYY")}
                   </StyledTableCell>
                   <StyledTableCell align="center">
-                    <Link to={`details/${item.id}`}><NotesIcon style={{ fontSize: 20 }} /></Link> 
+                    <Link to={`details/${item.id}`} style={style}>
+                      <NotesIcon style={{ fontSize: 20 }} />
+                    </Link>
+                    <Link to={`update/${item.id}`} style={style}>
+                      <EditIcon style={{ fontSize: 20 }} />
+                    </Link>
                   </StyledTableCell>
                 </StyledTableRow>
               ))}

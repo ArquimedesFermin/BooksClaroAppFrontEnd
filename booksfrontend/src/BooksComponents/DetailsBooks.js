@@ -3,13 +3,14 @@ import "./DetailsBooksStyle.css";
 import axios from "axios";
 import Container from "@material-ui/core/Container";
 import { useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 var moment = require("moment"); //
 
 function DetailsBooks() {
   const [bookInfo, setBookInfo] = React.useState([]);
   const { id } = useParams();
- 
+
   useEffect(() => {
     getById(id);
   }, []);
@@ -25,6 +26,10 @@ function DetailsBooks() {
     }
   }
 
+  const style = {
+    color: "black",
+    textDecoration: "none",
+  };
   return (
     <div>
       <h2>Detalle del Book</h2>
@@ -58,6 +63,16 @@ function DetailsBooks() {
             </label>
           </div>
         </div>
+        <p></p>
+        <p></p>
+        <p></p>
+        <p></p>
+        <p></p>
+        <p></p>
+        <Link to={``} style={style}>
+          {" "}
+          Volver atras!!{" "}
+        </Link>
       </Container>
     </div>
   );
