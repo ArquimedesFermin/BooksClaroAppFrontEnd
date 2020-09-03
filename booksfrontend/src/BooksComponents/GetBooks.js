@@ -9,9 +9,10 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import "./GetBookStyle.css";
-import AddIcon from "@material-ui/icons/Add";
+import NotesIcon from '@material-ui/icons/Notes';
 import TextField from "@material-ui/core/TextField";
 import { Autocomplete } from "@material-ui/lab";
+import { Link } from "react-router-dom";
 
 var moment = require("moment"); //
 
@@ -116,7 +117,7 @@ function GetBooks() {
                     {moment(item.publishDate).format("DD/MM/YYYY")}
                   </StyledTableCell>
                   <StyledTableCell align="center">
-                    <AddIcon style={{ fontSize: 40 }} />
+                    <Link to={`details/${item.id}`}><NotesIcon style={{ fontSize: 20 }} /></Link> 
                   </StyledTableCell>
                 </StyledTableRow>
               ))}

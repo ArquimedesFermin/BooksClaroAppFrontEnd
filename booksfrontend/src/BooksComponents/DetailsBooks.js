@@ -2,14 +2,16 @@ import React, { useEffect } from "react";
 import "./DetailsBooksStyle.css";
 import axios from "axios";
 import Container from "@material-ui/core/Container";
+import { useParams } from "react-router-dom";
 
 var moment = require("moment"); //
 
 function DetailsBooks() {
   const [bookInfo, setBookInfo] = React.useState([]);
-
+  const { id } = useParams();
+ 
   useEffect(() => {
-    getById(2);
+    getById(id);
   }, []);
 
   async function getById($id) {
