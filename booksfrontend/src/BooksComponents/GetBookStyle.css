@@ -1,14 +1,15 @@
-.table{
-    color:red;
-    padding-top:146px;
-    padding-left:9%;
-    width:82%;
-
-
+.table {
+  color: red;
+  padding-left: 9%;
+  width: 82%;
 }
 
-.cell{
-
-    white-space: nowrap
-
+.cell {
+  white-space: nowrap;
+}
+h2 {
+  text-align: center;
+}
+.buscar {
+  color: black;
 }

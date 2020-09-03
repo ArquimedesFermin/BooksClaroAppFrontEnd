@@ -9,9 +9,11 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import "./GetBookStyle.css";
-import AddIcon from '@material-ui/icons/Add';
+import AddIcon from "@material-ui/icons/Add";
+import TextField from "@material-ui/core/TextField";
+import { Autocomplete } from "@material-ui/lab";
 
-var moment = require("moment"); // 
+var moment = require("moment"); //
 
 function GetBooks() {
   const [books, setBooks] = React.useState([]);
@@ -24,6 +26,21 @@ function GetBooks() {
     const book = await axios.get("https://localhost:44337/api/Books/GetBooks");
     setBooks(book.data);
     console.log(books);
+  }
+
+  async function onChangeBookById(event, values) {
+    if (values === null) {
+      const book = await axios.get(
+        "https://localhost:44337/api/Books/GetBooks"
+      );
+      setBooks(book.data);
+      console.log(books);
+    } else {
+      const book = await axios.get(
+        "https://localhost:44337/api/Books/GetBooks/" + values.id
+      );
+      setBooks([book.data]);
+    }
   }
 
   const StyledTableCell = withStyles((theme) => ({
@@ -53,44 +70,60 @@ function GetBooks() {
   const classes = useStyles();
 
   return (
-    <div className="table">
-      {" "}
-      <TableContainer component={Paper}>
-        <Table className={classes.table} aria-label="customized table">
-          <TableHead>
-            <TableRow>
-              <StyledTableCell align="center">Titulo</StyledTableCell>
-              <StyledTableCell align="center">Descripcion</StyledTableCell>
-              <StyledTableCell align="center">Pagina</StyledTableCell>
-              <StyledTableCell align="center">Resumen</StyledTableCell>
-                          <StyledTableCell align="center">Publicacion</StyledTableCell>
-                          <StyledTableCell align="center"></StyledTableCell>
-
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {books.map((item) => (
-              <StyledTableRow key={item.id}>
-                <StyledTableCell className="cell" align="left">
-                  {item.title}{" "}
-                </StyledTableCell>
-                <StyledTableCell align="left">
-                  {item.description}
-                </StyledTableCell>
-                <StyledTableCell align="left">{item.pageCount}</StyledTableCell>
-                <StyledTableCell align="left">{item.excerpt}</StyledTableCell>
-                <StyledTableCell align="left">
-                  {moment(item.publishDate).format("DD/MM/YYYY")}
-                    </StyledTableCell>
-                    <StyledTableCell align="center">
+    <div>
+      <h2>ClaroBooks</h2>
+      <div className="table">
+        <div className={"buscar"}>
+          <Autocomplete
+            id="combo-box-demo"
+            onChange={onChangeBookById}
+            options={books}
+            getOptionLabel={(books) => books.title}
+            style={{ width: 300 }}
+            renderInput={(params) => (
+              <TextField {...params} label="Buscar" variant="outlined" />
+            )}
+          />{" "}
+        </div>
+        <p></p>
+        <p></p>
+        <TableContainer component={Paper}>
+          <Table className={classes.table} aria-label="customized table">
+            <TableHead>
+              <TableRow>
+                <StyledTableCell align="center">Titulo</StyledTableCell>
+                <StyledTableCell align="center">Descripcion</StyledTableCell>
+                <StyledTableCell align="center">Pagina</StyledTableCell>
+                <StyledTableCell align="center">Resumen</StyledTableCell>
+                <StyledTableCell align="center">Publicacion</StyledTableCell>
+                <StyledTableCell align="center"></StyledTableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {books.map((item) => (
+                <StyledTableRow key={item.id}>
+                  <StyledTableCell className="cell" align="left">
+                    {item.title}{" "}
+                  </StyledTableCell>
+                  <StyledTableCell align="left">
+                    {item.description}
+                  </StyledTableCell>
+                  <StyledTableCell align="left">
+                    {item.pageCount}
+                  </StyledTableCell>
+                  <StyledTableCell align="left">{item.excerpt}</StyledTableCell>
+                  <StyledTableCell align="left">
+                    {moment(item.publishDate).format("DD/MM/YYYY")}
+                  </StyledTableCell>
+                  <StyledTableCell align="center">
                     <AddIcon style={{ fontSize: 40 }} />
-
-                </StyledTableCell>
-              </StyledTableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
+                  </StyledTableCell>
+                </StyledTableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      </div>
     </div>
   );
 }
